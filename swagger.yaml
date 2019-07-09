@@ -1,0 +1,419 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "Mesjidnesia"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+tags:
+- name: "insho"
+  description: "test"
+  externalDocs: 
+    description: "cekidot broh"
+    url: "http://masjidnesia.io"
+- name: "zakat"
+  description: "test"
+  externalDocs: 
+    description: "cekidot broh"
+    url: "http://masjidnesia.io"    
+schemes:
+- "https"
+- "http"
+paths:
+  /api/inshos/:id:
+    get:
+      tags:
+      - "insho"
+      summary: "get by id"
+      description: "get by id"
+      operationId: "FindById"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/InshoData"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+    patch:  
+      tags:
+      - "insho"
+      summary: "update data by id"
+      description: "update data"
+      operationId: "UpdateById"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/InshoData"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+    delete:
+      tags:
+      - "insho"
+      summary: "delete by id"
+      description: "delete by id"
+      operationId: "DeleteById"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+            
+  /api/inshos{offset_limit}:
+    get:
+      tags:
+      - "insho"
+      summary: "get data"
+      description: "get data"
+      operationId: "FindByData"
+      parameters:
+      - name: "offset_limit"
+        in: "path"
+        description: "fill with value (?offset,limit)"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/InshoData"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+  /api/inshos:
+    post:
+      tags:
+      - "insho"
+      summary: "get data"
+      description: "get data"
+      operationId: "PostById"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/InshoData"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+            
+  /api/zakat/:id:
+    get:
+      tags:
+      - "zakat"
+      summary: "get by id"
+      description: "get by id"
+      operationId: "FindByIdZakat"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ZakatData"
+        404:
+          description: "Data not found"
+    patch:
+      tags:
+      - "zakat"
+      summary: "insert data zakat"
+      description: "Update data"
+      operationId: "UpdateByIdZakat"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "object that needs to be updated to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/ZakatDataInsert"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+    delete:
+      tags:
+      - "zakat"
+      summary: "delete data zakat"
+      description: "delete data"
+      operationId: "DeleteByIdZakat"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"        
+  /api/zakat{offset_limit}:
+    get:
+      tags:
+      - "zakat"
+      summary: "get data"
+      description: "get data"
+      operationId: "FindByDataZakat"
+      parameters:
+      - name: "offset_limit"
+        in: "path"
+        description: "fill with value (?offset,limit)"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ZakatData"
+        404:
+          description: "Data not found"
+  /api/zakat:
+    post:
+      tags:
+      - "zakat"
+      summary: "insert data zakat"
+      description: "get data"
+      operationId: "PostByIdZakat"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/ZakatDataInsert"
+      responses: 
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseOK"
+        404:
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ResponseNOK"
+    
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  InshoData: 
+    type: "object"
+    properties:
+      mosque_id: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "1"
+      name:
+        type: "string"
+        description: "isinya"
+        enum:
+        - "zuzun zunaedi"
+        - "sumiah mustakim"
+        - "arman duliman"
+      amount: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "100000"
+      description: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "untuk zakat mal"
+      transaction_date: 
+        type: "string"
+        format: "date-time"
+  ZakatData: 
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "1"
+        - "2"
+        - "3"
+      mosque_id: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "1"
+        - "55"
+        - "7"
+      code: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "zakat-1"  
+      name:
+        type: "string"
+        description: "isinya"
+        enum:
+        - "zuzun zunaedi"
+      type: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "fitrah"
+        - "mal"
+      item: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "uang"
+        - "beras"
+        - "dll"
+      amount: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "100000"
+        - "10000"
+        - "1000000"
+      created_at: 
+        type: "string"
+        format: "date-time"
+      modified_at: 
+        type: "string"
+        format: "date-time"
+      deleted_at: 
+        type: "string"
+        format: "date-time"   
+      transaction_date: 
+        type: "string"
+        format: "date-time"
+  ZakatDataInsert: 
+    type: "object"
+    properties:
+      mosque_id: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "1"
+        - "55"
+        - "7"
+      code: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "zakat-1"  
+      name:
+        type: "string"
+        description: "isinya"
+        enum:
+        - "zuzun zunaedi"
+      type: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "fitrah"
+        - "mal"
+      item: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "uang"
+        - "beras"
+        - "dll"
+      amount: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "100000"
+        - "10000"
+        - "1000000"
+      status: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "draft"
+        - "approved"
+      transaction_date: 
+        type: "string"
+        format: "date-time"      
+  ResponseOK:
+    type: "object"
+    properties:
+      type: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "Success"
+      code: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "200"
+      message: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "Request Success"
+  ResponseNOK:
+    type: "object"
+    properties:
+      type: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "Failed"
+      code: 
+        type: "integer"
+        format: "int32"
+        description: "isinya"
+        enum:
+        - "404"
+      message: 
+        type: "string"
+        description: "isinya"
+        enum:
+        - "Data not found"
